@@ -1,0 +1,9 @@
+steps:
+- name: 'node:lts-alpine3.12'
+  entrypoint: 'npm'
+  args: ['run','deploy']
+  dir: 'VaccineAppointment'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['-q','app', 'deploy', 'app.yaml', '--project=<pid>']
+
+timeout: "3000s"
