@@ -1,9 +1,13 @@
 steps:
-- name: 'node:lts-alpine3.12'
-  entrypoint: 'npm'
-  args: ['run','deploy']
-  dir: 'VaccineAppointment'
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['-q','app', 'deploy', 'app.yaml', '--project=<pid>']
 
-timeout: "3000s"
+  # Install node packages
+  - name: 'gcr.io/cloud-builders/npm'
+    args: [ 'install' ]
+
+  # Build productive files
+  - name: 'gcr.io/cloud-builders/npm'
+    args: [ 'run', 'build', '--prod' ]
+
+  # Deploy to google cloud app egnine
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '--version=prod']
