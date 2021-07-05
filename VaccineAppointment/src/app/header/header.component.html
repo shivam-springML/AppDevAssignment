@@ -1,0 +1,16 @@
+<nav _ngcontent-eaj-c35="" class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark topNavigation">
+    <div _ngcontent-eaj-c35="" class="container">
+      
+      <div _ngcontent-eaj-c35="" id="navbarText" class="collapse navbar-collapse">
+        <ul _ngcontent-eaj-c35="" class="navbar-nav ml-auto">
+          
+          <li *ngIf="ngAuthService.isLoggedIn" _ngcontent-eaj-c35="" class="nav-item smallMenu"> <span style="color: #fff; font-weight: 600; ">Hi, {{get_user()}}</span>&nbsp;<u><a  (click)="ngAuthService.SignOut()"
+               style="color: #fff; font-weight: 600; ">Sign Out</a></u></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+<div class="containter" style="padding-left:90px; padding-top: 70px; padding-right: 100px;">
+    <router-outlet></router-outlet>
+</div>
