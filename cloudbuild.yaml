@@ -11,7 +11,7 @@
    args:
    - 'run'
    - 'deploy'
-   - 'myimage:'
+   - 'myimage'
    - '--image'
    - 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA'
    - '--region'
