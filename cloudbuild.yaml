@@ -13,11 +13,11 @@
 
  # Build productive files
  - name: 'gcr.io/cloud-builders/npm'
-   args: [ 'run', 'build',]
+   args: [ 'run', 'build','--prod' ]
    dir: 'VaccineAppointment/'
 # Deploy to google cloud app egnine
  - name: 'gcr.io/cloud-builders/gcloud'
-   args: ['app', 'deploy',]
+   args: ['app', 'deploy','--version=prod']
 #  # Build the container image
 #  - name: 'gcr.io/cloud-builders/docker'
 #    args: ['build', '-t', 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA', '.']
