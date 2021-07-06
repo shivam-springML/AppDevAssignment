@@ -5,7 +5,7 @@
    - functions
    - deploy
    - bucket_firebase
-   - --source= CloudFunction/
+   - --source=CloudFunction/
  # Install node packages
  - name: 'gcr.io/cloud-builders/npm'
    args: [ 'install' ]
