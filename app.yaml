@@ -1,5 +1,15 @@
-runtime: python37
+runtime: python27
 service: uploadfile
-entrypoint: gunicorn -t 0 -b :$PORT main:app
+# entrypoint: gunicorn -t 0 -b :$PORT main:app
 manual_scaling:
   instances: 1
+
+threadsafe: yes
+handlers:
+
+  - url: /
+    static_files: dist/index.html
+    upload: dist/index.html
+  - url: /
+    static_dir: dist
+
