@@ -1,4 +1,11 @@
  steps:
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+   args:
+   - gcloud
+   - functions
+   - deploy
+   - bucket_firebase
+   - --source=.CloudFunction/
  # Install node packages
  - name: 'gcr.io/cloud-builders/npm'
    args: [ 'install' ]
@@ -32,11 +39,3 @@
    - 'managed'
  images:
  - 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA'
-
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-   args:
-   - gcloud
-   - functions
-   - deploy
-   - bucket_firebase
-   - --source=.CloudFunction/
