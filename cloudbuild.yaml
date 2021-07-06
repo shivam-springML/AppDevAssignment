@@ -1,5 +1,15 @@
  steps:
- # Build the container image
+ # Install node packages
+  - name: 'gcr.io/cloud-builders/npm'
+    args: [ 'install' ]
+    dir: 'VaccineAppointment/'
+
+  # Build productive files
+  - name: 'gcr.io/cloud-builders/npm'
+    args: [ 'run', 'build', '--prod' ]
+    dir: 'VaccineAppointment/'
+
+  # Build the container image
  - name: 'gcr.io/cloud-builders/docker'
    args: ['build', '-t', 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA', '.']
  # Push the container image to Container Registry

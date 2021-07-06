@@ -2,6 +2,8 @@ FROM python:3.8-slim
 
 COPY . ./
 
+ENV PYTHONUNBUFFERED True
+
 WORKDIR .
 
 RUN pip install -r requirements.txt
