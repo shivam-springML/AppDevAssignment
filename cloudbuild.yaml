@@ -1,32 +1,35 @@
  steps:
  # Install node packages
-  - name: 'gcr.io/cloud-builders/npm'
-    args: [ 'install' ]
-    dir: 'VaccineAppointment/'
+ - name: 'gcr.io/cloud-builders/npm'
+   args: [ 'install' ]
+   dir: 'VaccineAppointment/'
 
-  # Build productive files
-  - name: 'gcr.io/cloud-builders/npm'
-    args: [ 'run', 'build', '--prod' ]
-    dir: 'VaccineAppointment/'
+ # Build productive files
+ - name: 'gcr.io/cloud-builders/npm'
+   args: [ 'run', 'build', '--prod' ]
+   dir: 'VaccineAppointment/'
 
-  # Build the container image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA', '.']
-  # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA']
-  # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-    - 'run'
-    - 'deploy'
-    - 'myimage'
-    - '--image'
-    - 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA'
-    - '--region'
-    - 'asia-east1'
-    - '--platform'
-    - 'managed'
-  images:
-  - 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA'
+ # Deploy to google cloud app egnine
+ - name: 'gcr.io/cloud-builders/gcloud'
+   args: ['app', 'deploy', '--version=prod']
+ # Build the container image
+ - name: 'gcr.io/cloud-builders/docker'
+   args: ['build', '-t', 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA', '.']
+ # Push the container image to Container Registry
+ - name: 'gcr.io/cloud-builders/docker'
+   args: ['push', 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA']
+ # Deploy container image to Cloud Run
+ - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+   entrypoint: gcloud
+   args:
+   - 'run'
+   - 'deploy'
+   - 'myimage'
+   - '--image'
+   - 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA'
+   - '--region'
+   - 'asia-east1'
+   - '--platform'
+   - 'managed'
+ images:
+ - 'gcr.io/still-chassis-302715/myimage:$COMMIT_SHA'
