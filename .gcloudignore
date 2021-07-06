@@ -10,3 +10,9 @@ content:
 node_modules/
 CloudFunction/
 *~
+e2e/
+^(.*/)?\..*$
+^(.*/)?.*\.json$
+^(.*/)?.*\.md$
+^(.*/)?.*\.yaml$
+^LICENSE
